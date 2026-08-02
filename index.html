@@ -49,29 +49,31 @@
     <!-- Main buttons displayed on the faded right side -->
     <section class="action-panel" aria-label="Website navigation">
       <div class="main-buttons">
-        <button
-          class="main-button"
-          type="button"
-          data-view="projects"
-        >
-          Projects
-        </button>
+        <div class="main-button-item">
+          <nav class="dock-stack" aria-label="Project previews">
+            <button class="dock-card" type="button" data-view="projects"><span>01</span><strong>Project 1</strong></button>
+            <button class="dock-card" type="button" data-view="projects"><span>02</span><strong>Project 2</strong></button>
+            <button class="dock-card" type="button" data-view="projects"><span>03</span><strong>Project 3</strong></button>
+          </nav>
+          <button class="main-button" type="button" data-view="projects">Projects</button>
+        </div>
 
-        <button
-          class="main-button"
-          type="button"
-          data-view="cv"
-        >
-          CV
-        </button>
+        <div class="main-button-item">
+          <nav class="dock-stack dock-stack-two" aria-label="CV formats">
+            <a class="dock-card" href="CV.pdf" target="_blank" rel="noopener"><span>PDF</span><strong>CV.pdf</strong></a>
+            <button class="dock-card" type="button" data-view="cv"><span>▶</span><strong>Mini animation</strong></button>
+          </nav>
+          <button class="main-button" type="button" data-view="cv">CV</button>
+        </div>
 
-        <button
-          class="main-button"
-          type="button"
-          data-view="extra"
-        >
-          Extra
-        </button>
+        <div class="main-button-item">
+          <nav class="dock-stack" aria-label="Extra previews">
+            <button class="dock-card" type="button" data-view="extra"><span>01</span><strong>Extra 1</strong></button>
+            <button class="dock-card" type="button" data-view="extra"><span>02</span><strong>Extra 2</strong></button>
+            <button class="dock-card" type="button" data-view="extra"><span>03</span><strong>Extra 3</strong></button>
+          </nav>
+          <button class="main-button" type="button" data-view="extra">Extra</button>
+        </div>
       </div>
     </section>
   </main>

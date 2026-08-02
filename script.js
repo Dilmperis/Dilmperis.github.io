@@ -7,6 +7,26 @@ const menuButtons = document.querySelectorAll("[data-view]");
 const contactMenus = document.querySelectorAll(".contact-menu");
 const contactTriggers = document.querySelectorAll("[data-popover-target]");
 const neuralCanvas = document.querySelector("#neural-background");
+const dockPdfLink = document.querySelector('.dock-card[href="CV.pdf"]');
+
+/**
+ * A link opened in a new tab can retain focus when this page is revisited.
+ * Blur only the Dock PDF link so its focus-within fan does not stay open.
+ */
+function releaseDockPdfFocus() {
+  if (document.activeElement === dockPdfLink) {
+    dockPdfLink.blur();
+  }
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    releaseDockPdfFocus();
+  }
+});
+
+window.addEventListener("pageshow", releaseDockPdfFocus);
+window.addEventListener("focus", releaseDockPdfFocus);
 
 // This is the construction image currently used in README.md.
 const constructionImageUrl =
@@ -317,6 +337,39 @@ function showUnderConstruction(sectionName) {
   `;
 }
 
+/** Display the two CV formats. */
+function showCvOptions() {
+  modalTitle.textContent = "CV";
+
+  modalContent.innerHTML = `
+    <div class="option-grid option-grid-two">
+      <a class="option-card" href="CV.pdf" target="_blank" rel="noopener">
+        <span class="option-icon" aria-hidden="true">PDF</span>
+        <span><strong>CV.pdf</strong><small>Open the full curriculum vitae</small></span>
+      </a>
+      <article class="option-card option-card-placeholder">
+        <span class="option-icon option-icon-play" aria-hidden="true">▶</span>
+        <span><strong>CV mini animation</strong><small>Your AI-generated video will appear here</small></span>
+      </article>
+    </div>
+  `;
+}
+
+/** Display the three Extra placeholders. */
+function showExtraOptions() {
+  modalTitle.textContent = "Extra";
+  modalContent.innerHTML = `
+    <div class="option-grid">
+      ${[1, 2, 3].map((number) => `
+        <article class="option-card option-card-placeholder">
+          <span class="option-icon" aria-hidden="true">0${number}</span>
+          <span><strong>Extra ${number}</strong><small>Content coming soon</small></span>
+        </article>
+      `).join("")}
+    </div>
+  `;
+}
+
 /**
  * Open the modal for the selected section.
  *
@@ -326,9 +379,9 @@ function openModal(view) {
   if (view === "projects") {
     showProjects();
   } else if (view === "cv") {
-    showUnderConstruction("CV");
+    showCvOptions();
   } else if (view === "extra") {
-    showUnderConstruction("Extra");
+    showExtraOptions();
   } else {
     return;
   }
