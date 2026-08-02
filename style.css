@@ -207,7 +207,8 @@ body.modal-open {
 }
 
 .portrait img {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: 100%;
 
   display: block;
@@ -219,20 +220,20 @@ body.modal-open {
     linear-gradient(
       to right,
       black 0%,
-      black 44%,
-      rgba(0, 0, 0, 0.85) 50%,
-      rgba(0, 0, 0, 0.35) 56%,
-      transparent 62%
+      black 68%,
+      rgba(0, 0, 0, 0.9) 76%,
+      rgba(0, 0, 0, 0.35) 90%,
+      transparent 100%
     );
 
   mask-image:
     linear-gradient(
       to right,
       black 0%,
-      black 44%,
-      rgba(0, 0, 0, 0.85) 50%,
-      rgba(0, 0, 0, 0.35) 56%,
-      transparent 62%
+      black 68%,
+      rgba(0, 0, 0, 0.9) 76%,
+      rgba(0, 0, 0, 0.35) 90%,
+      transparent 100%
     );
 }
 
@@ -876,28 +877,6 @@ body.modal-open {
 
   .portrait {
     width: 100%;
-  }
-
-  .portrait img {
-    object-position: left top;
-
-    -webkit-mask-image:
-      linear-gradient(
-        to right,
-        black 0%,
-        rgba(0, 0, 0, 0.85) 35%,
-        rgba(0, 0, 0, 0.28) 70%,
-        transparent 100%
-      );
-
-    mask-image:
-      linear-gradient(
-        to right,
-        black 0%,
-        rgba(0, 0, 0, 0.85) 35%,
-        rgba(0, 0, 0, 0.28) 70%,
-        transparent 100%
-      );
   }
 
   .action-panel {
