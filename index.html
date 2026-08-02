@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Personal website of Ioannis Dilmperis"
+  >
+
+  <title>Giannis Dilmperis</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Website title -->
+  <header class="site-header">
+    <h1>Ioannis Dilmperis</h1>
+  </header>
+
+  <main class="hero">
+    <!-- Profile image displayed on the left -->
+    <div class="portrait">
+      <img
+        src="images/profile.jpg"
+        alt="Portrait of Ioannis Dilmperis"
+      >
+    </div>
+
+    <!-- Main buttons displayed on the faded right side -->
+    <section class="action-panel" aria-label="Website navigation">
+      <p class="welcome-text">Welcome to my personal website.</p>
+
+      <div class="main-buttons">
+        <button
+          class="main-button"
+          type="button"
+          data-view="projects"
+        >
+          Projects
+        </button>
+
+        <button
+          class="main-button"
+          type="button"
+          data-view="cv"
+        >
+          CV
+        </button>
+
+        <button
+          class="main-button"
+          type="button"
+          data-view="extra"
+        >
+          Extra
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!--
+    This modal is hidden initially.
+    JavaScript opens it when a main button is clicked.
+  -->
+  <div
+    class="modal"
+    id="content-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    hidden
+  >
+    <div class="modal-window">
+      <button
+        class="close-button"
+        id="close-modal"
+        type="button"
+        aria-label="Close window"
+      >
+        &times;
+      </button>
+
+      <h2 id="modal-title"></h2>
+
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
