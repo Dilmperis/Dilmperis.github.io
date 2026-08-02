@@ -1,0 +1,19 @@
+{
+  "name": "Giannis Dilmperis",
+  "short_name": "GD",
+  "icons": [
+    {
+      "src": "images/favicon-192x192.png?v=2",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/favicon-512x512.png?v=2",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#050505",
+  "background_color": "#050505",
+  "display": "standalone"
+}
