@@ -348,7 +348,7 @@ function showCvOptions() {
       </a>
       <article class="option-card option-card-placeholder">
         <span class="option-icon option-icon-play" aria-hidden="true">▶</span>
-        <span><strong>CV mini animation</strong><small>Your AI-generated video will appear here</small></span>
+        <span><strong>CV mini animation</strong><small>A mini animation as alternative form of CV</small></span>
       </article>
     </div>
   `;
