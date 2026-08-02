@@ -19,9 +19,16 @@
 </head>
 
 <body>
+  <canvas
+    class="neural-background"
+    id="neural-background"
+    aria-hidden="true"
+  ></canvas>
+
   <!-- Website title -->
   <header class="site-header">
-    <h1>Ioannis Dilmperis</h1>
+    <h1>Giannis Dilmperis</h1>
+    <p class="welcome-text">Welcome to my website</p>
   </header>
 
   <main class="hero">
@@ -35,8 +42,6 @@
 
     <!-- Main buttons displayed on the faded right side -->
     <section class="action-panel" aria-label="Website navigation">
-      <p class="welcome-text">Welcome to my personal website.</p>
-
       <div class="main-buttons">
         <button
           class="main-button"
@@ -94,13 +99,100 @@
   </div>
 
   <nav class="contact-links" aria-label="Contact links">
-    <a
-      href="https://github.com/Dilmperis"
-      target="_blank"
-      rel="noopener noreferrer"
-    >GitHub</a>
+    <div class="contact-menu">
+      <button
+        class="contact-trigger"
+        id="social-trigger"
+        type="button"
+        data-popover-target="social-popover"
+        aria-expanded="false"
+        aria-controls="social-popover"
+      >Social media</button>
 
-    <a href="mailto:dilmperis@hotmail.com">Email</a>
+      <div
+        class="contact-popover social-popover"
+        id="social-popover"
+        role="dialog"
+        aria-label="Social media"
+        hidden
+      >
+        <a class="social-icon facebook-icon" href="https://www.facebook.com/GiannisDilmperis" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 8h3V4h-3c-3 0-5 2-5 5v2H6v4h3v7h4v-7h3l1-4h-4V9c0-.7.3-1 1-1Z"/>
+          </svg>
+        </a>
+
+        <a class="social-icon instagram-icon" href="https://www.instagram.com/giannis_dil" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle class="icon-dot" cx="17.4" cy="6.7" r="1"/>
+          </svg>
+        </a>
+
+        <a class="social-icon twitter-icon" href="https://x.com/GiannisDilberis" target="_blank" rel="noopener noreferrer" title="X / Twitter" aria-label="X / Twitter">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 4 19 20M19 4 5 20"/>
+          </svg>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="contact-menu">
+      <button
+        class="contact-trigger"
+        type="button"
+        data-popover-target="github-popover"
+        aria-expanded="false"
+        aria-controls="github-popover"
+      >GitHub</button>
+
+      <div
+        class="contact-popover compact-popover"
+        id="github-popover"
+        role="dialog"
+        aria-label="GitHub"
+        hidden
+      >
+        <a
+          class="contact-action"
+          href="https://github.com/Dilmperis"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.6 4.9.4.3.7.9.7 1.8V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/>
+          </svg>
+          <span>Open GitHub profile</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-menu">
+      <button
+        class="contact-trigger"
+        type="button"
+        data-popover-target="email-popover"
+        aria-expanded="false"
+        aria-controls="email-popover"
+      >Email</button>
+
+      <div
+        class="contact-popover compact-popover"
+        id="email-popover"
+        role="dialog"
+        aria-label="Email"
+        hidden
+      >
+        <a class="contact-action" href="mailto:dilmperis@hotmail.com">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 5h18v14H3V5Zm2 2v.4l7 5.2 7-5.2V7H5Zm14 10V9.9l-7 5.2-7-5.2V17h14Z"/>
+          </svg>
+          <span>dilmperis@hotmail.com</span>
+        </a>
+      </div>
+    </div>
   </nav>
 
   <script src="script.js"></script>
