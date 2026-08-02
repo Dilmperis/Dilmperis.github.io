@@ -107,17 +107,13 @@ body.modal-open {
 }
 
 .portrait img {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
 
   display: block;
 
   object-fit: cover;
-<<<<<<< HEAD
-  object-position: 35% 40%;;
-=======
   object-position: 35% 40%;
->>>>>>> e9bdfdf (Img Fix position)
 
   -webkit-mask-image:
     linear-gradient(
@@ -138,6 +134,44 @@ body.modal-open {
       rgba(0, 0, 0, 0.35) 76%,
       transparent 100%
     );
+}
+
+/* ------------------------------
+   Contact links
+------------------------------ */
+
+.contact-links {
+  position: fixed;
+  bottom: 28px;
+  left: 32px;
+
+  z-index: 20;
+
+  display: flex;
+  gap: 20px;
+}
+
+.contact-links a {
+  color: var(--muted-text);
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.contact-links a:hover {
+  color: var(--text);
+  transform: translateY(-2px);
+}
+
+.contact-links a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 5px;
 }
 
 /*
@@ -385,6 +419,11 @@ body.modal-open {
   .site-header {
     top: 24px;
     right: 24px;
+  }
+
+  .contact-links {
+    bottom: 20px;
+    left: 24px;
   }
 
   .hero {
