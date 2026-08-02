@@ -29,49 +29,50 @@ function initializeNeuralBackground() {
 
   const frameInterval = 1000 / 30;
   const layerSizes = [3, 5, 7, 5, 3, 1];
-  const layerPositions = [0.6, 0.67, 0.74, 0.81, 0.88, 0.95];
   const flowDuration = 12500;
 
   function createModel() {
     const compactLayout = width < 760;
-    const headerRectangle = document
-      .querySelector(".site-header")
-      .getBoundingClientRect();
     const panelRectangle = document
       .querySelector(".action-panel")
       .getBoundingClientRect();
-    const top = Math.max(height * 0.15, headerRectangle.bottom + 22);
-    const bottom = height * 0.88;
-    const upperEnd = Math.max(top + 20, panelRectangle.top - 28);
-    const lowerStart = Math.min(bottom - 20, panelRectangle.bottom + 28);
+    const panelCenterX = panelRectangle.left + panelRectangle.width / 2;
+    const panelCenterY = panelRectangle.top + panelRectangle.height / 2;
+    const desiredHalfWidth = compactLayout ? width * 0.27 : width * 0.2;
+    const availableHalfWidth = Math.min(
+      panelCenterX - width * (compactLayout ? 0.42 : 0.5),
+      width * 0.97 - panelCenterX
+    );
+    const modelHalfWidth = Math.max(
+      width * 0.16,
+      Math.min(desiredHalfWidth, availableHalfWidth)
+    );
+    const modelTop = Math.max(
+      height * 0.14,
+      panelCenterY - Math.max(panelRectangle.height * 0.95, height * 0.28)
+    );
+    const modelBottom = Math.min(
+      height * 0.9,
+      panelCenterY + Math.max(panelRectangle.height * 0.95, height * 0.28)
+    );
+    const modelHeight = modelBottom - modelTop;
+    const layerStep = (modelHalfWidth * 2) / (layerSizes.length - 1);
 
     layers = layerSizes.map((layerSize, layerIndex) => {
       const visibleLayerSize = compactLayout
         ? Math.max(1, layerSize - 2)
         : layerSize;
-      const upperCount = compactLayout
-        ? visibleLayerSize
-        : Math.ceil(visibleLayerSize / 2);
-      const lowerCount = compactLayout ? 0 : visibleLayerSize - upperCount;
 
       return Array.from({ length: visibleLayerSize }, (_, nodeIndex) => {
-        let y;
-
-        if (layerIndex === layerSizes.length - 1) {
-          y = compactLayout
-            ? Math.max(top, panelRectangle.top - 42)
-            : lowerStart + (bottom - lowerStart) * 0.62;
-        } else if (nodeIndex < upperCount) {
-          const upperProgress = (nodeIndex + 1) / (upperCount + 1);
-          y = top + (upperEnd - top) * upperProgress;
-        } else {
-          const lowerIndex = nodeIndex - upperCount;
-          const lowerProgress = (lowerIndex + 1) / (lowerCount + 1);
-          y = lowerStart + (bottom - lowerStart) * lowerProgress;
-        }
+        const y =
+          layerIndex === layerSizes.length - 1
+            ? Math.min(height * 0.88, panelRectangle.bottom + 54)
+            : visibleLayerSize === 1
+            ? panelCenterY
+            : modelTop + (nodeIndex / (visibleLayerSize - 1)) * modelHeight;
 
         return {
-          x: width * layerPositions[layerIndex],
+          x: panelCenterX - modelHalfWidth + layerIndex * layerStep,
           y,
           radius: layerIndex === layerSizes.length - 1 ? 5 : 3.2
         };
