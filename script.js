@@ -5,7 +5,6 @@ const modalContent = document.querySelector("#modal-content");
 const closeButton = document.querySelector("#close-modal");
 const menuButtons = document.querySelectorAll("[data-view]");
 const contactMenus = document.querySelectorAll(".contact-menu");
-const contactTriggers = document.querySelectorAll("[data-popover-target]");
 const neuralCanvas = document.querySelector("#neural-background");
 const dockPdfLink = document.querySelector('.dock-card[href="CV.pdf"]');
 
@@ -437,30 +436,54 @@ function closeContactPopovers(exception = null) {
   });
 }
 
-// Toggle each contact popover without leaving the welcome page.
-contactTriggers.forEach((trigger) => {
+function openContactPopover(trigger, popover) {
+  closeContactPopovers(popover);
+  popover.hidden = false;
+  trigger.setAttribute("aria-expanded", "true");
+
+  requestAnimationFrame(() => {
+    popover.classList.add("is-open");
+  });
+}
+
+// Show contact popovers as soon as their label is hovered or focused.
+contactMenus.forEach((menu) => {
+  const trigger = menu.querySelector("[data-popover-target]");
+  const popover = menu.querySelector(".contact-popover");
+  let closeTimer;
+
+  const cancelClose = () => window.clearTimeout(closeTimer);
+  const open = () => {
+    cancelClose();
+    openContactPopover(trigger, popover);
+  };
+  const closeAfterPointerLeaves = () => {
+    cancelClose();
+    closeTimer = window.setTimeout(() => closeContactPopovers(), 300);
+  };
+
+  menu.addEventListener("mouseenter", open);
+  menu.addEventListener("mouseleave", closeAfterPointerLeaves);
+  menu.addEventListener("focusin", open);
+  menu.addEventListener("focusout", (event) => {
+    if (!menu.contains(event.relatedTarget)) {
+      closeContactPopovers();
+    }
+  });
+
+  // Keep a click toggle for devices that do not support hover.
   trigger.addEventListener("click", () => {
-    const popover = document.querySelector(`#${trigger.dataset.popoverTarget}`);
-    const wasOpen = !popover.hidden && popover.classList.contains("is-open");
-
-    closeContactPopovers(popover);
-
-    if (wasOpen) {
-      popover.classList.remove("is-open");
-      trigger.setAttribute("aria-expanded", "false");
-
-      window.setTimeout(() => {
-        popover.hidden = true;
-      }, 240);
+    if (window.matchMedia("(hover: hover)").matches) {
+      open();
       return;
     }
 
-    popover.hidden = false;
-    trigger.setAttribute("aria-expanded", "true");
-
-    requestAnimationFrame(() => {
-      popover.classList.add("is-open");
-    });
+    const isOpen = !popover.hidden && popover.classList.contains("is-open");
+    if (isOpen) {
+      closeContactPopovers();
+    } else {
+      open();
+    }
   });
 });
 

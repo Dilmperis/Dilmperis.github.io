@@ -258,7 +258,9 @@ body.modal-open {
 
   background: transparent;
   border: 0;
-  padding: 0;
+  /* A generous invisible hit area makes the labels easier to hover. */
+  padding: 12px 10px;
+  margin: -12px -10px;
 
   font-size: 0.95rem;
   font-family: inherit;
