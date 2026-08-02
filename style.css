@@ -113,7 +113,7 @@ body.modal-open {
   display: block;
 
   object-fit: cover;
-  object-position: center top;
+  object-position: 35% 40%;;
 
   -webkit-mask-image:
     linear-gradient(
