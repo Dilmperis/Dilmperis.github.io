@@ -412,6 +412,24 @@ function closeModal() {
 }
 
 /**
+ * Close one anchored contact popover.
+ */
+function closeContactPopover(trigger, popover) {
+  if (popover.hidden) {
+    return;
+  }
+
+  popover.classList.remove("is-open");
+  trigger.setAttribute("aria-expanded", "false");
+
+  window.setTimeout(() => {
+    if (!popover.classList.contains("is-open")) {
+      popover.hidden = true;
+    }
+  }, 240);
+}
+
+/**
  * Close all anchored contact popovers.
  *
  * @param {HTMLElement|null} exception - Popover that should remain open.
@@ -425,14 +443,7 @@ function closeContactPopovers(exception = null) {
       return;
     }
 
-    popover.classList.remove("is-open");
-    trigger.setAttribute("aria-expanded", "false");
-
-    window.setTimeout(() => {
-      if (!popover.classList.contains("is-open")) {
-        popover.hidden = true;
-      }
-    }, 240);
+    closeContactPopover(trigger, popover);
   });
 }
 
@@ -459,7 +470,10 @@ contactMenus.forEach((menu) => {
   };
   const closeAfterPointerLeaves = () => {
     cancelClose();
-    closeTimer = window.setTimeout(() => closeContactPopovers(), 300);
+    closeTimer = window.setTimeout(
+      () => closeContactPopover(trigger, popover),
+      300
+    );
   };
 
   menu.addEventListener("mouseenter", open);
@@ -467,7 +481,7 @@ contactMenus.forEach((menu) => {
   menu.addEventListener("focusin", open);
   menu.addEventListener("focusout", (event) => {
     if (!menu.contains(event.relatedTarget)) {
-      closeContactPopovers();
+      closeContactPopover(trigger, popover);
     }
   });
 

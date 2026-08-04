@@ -25,6 +25,7 @@ html {
 body {
   min-height: 100vh;
   min-height: 100svh;
+  min-height: 100dvh;
 
   margin: 0;
 
@@ -180,6 +181,7 @@ body.modal-open {
 
   min-height: 100vh;
   min-height: 100svh;
+  min-height: 100dvh;
 
   display: flex;
   align-items: center;
@@ -200,8 +202,9 @@ body.modal-open {
   position: absolute;
   inset: 0 auto 0 0;
 
-  width: min(76%, 82.2vh);
-  width: min(76%, 82.2svh);
+  width: min(76%, 85.22vh);
+  width: min(76%, 85.22svh);
+  width: min(76%, 85.22dvh);
   height: 100%;
 
   z-index: 0;
@@ -213,7 +216,8 @@ body.modal-open {
 
   display: block;
 
-  object-fit: contain;
+  /* Always cover the portrait area, including in tall desktop windows. */
+  object-fit: cover;
   object-position: left top;
 
   -webkit-mask-image:
@@ -1412,8 +1416,9 @@ a.option-card:hover {
   }
 
   .portrait {
-    width: min(100%, 82.2vh);
-    width: min(100%, 82.2svh);
+    width: min(100%, 85.22vh);
+    width: min(100%, 85.22svh);
+    width: min(100%, 85.22dvh);
   }
 
   .action-panel {
