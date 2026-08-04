@@ -7,6 +7,12 @@ const menuButtons = document.querySelectorAll("[data-view]");
 const contactMenus = document.querySelectorAll(".contact-menu");
 const neuralCanvas = document.querySelector("#neural-background");
 const dockPdfLink = document.querySelector('.dock-card[href="CV.pdf"]');
+const projectShowcase = document.querySelector("#data-attribution-showcase");
+const projectShowcaseBack = document.querySelector("#showcase-back");
+
+let showcaseReturnFocus = null;
+
+projectShowcase.inert = true;
 
 /**
  * A link opened in a new tab can retain focus when this page is revisited.
@@ -264,14 +270,20 @@ initializeNeuralBackground();
  * @returns {string} HTML for the project card.
  */
 function createProjectCard(projectNumber) {
+  const tagName = projectNumber === 2 ? "button" : "article";
+  const interactiveAttributes = projectNumber === 2
+    ? 'type="button" data-project-showcase="data-attribution" aria-label="Open Project 2: Data Attribution"'
+    : "";
+  const interactiveClass = projectNumber === 2 ? " project-card-button" : "";
+
   return `
-    <article class="project-card">
+    <${tagName} class="project-card${interactiveClass}" ${interactiveAttributes}>
       <img
         src="${constructionImageUrl}"
         alt="Project ${projectNumber} under construction"
       >
       <h3>Project ${projectNumber}</h3>
-    </article>
+    </${tagName}>
   `;
 }
 
@@ -508,6 +520,55 @@ document.addEventListener("click", (event) => {
   }
 });
 
+/** Slide from the welcome scene into the Project 2 prototype. */
+function openProjectShowcase(trigger) {
+  showcaseReturnFocus = trigger?.closest("#content-modal")
+    ? document.querySelector('.main-button[data-view="projects"]')
+    : trigger;
+
+  if (!modal.hidden) {
+    closeModal();
+  }
+
+  closeContactPopovers();
+  projectShowcase.inert = false;
+  projectShowcase.setAttribute("aria-hidden", "false");
+  document.body.classList.add("showcase-open");
+
+  requestAnimationFrame(() => {
+    projectShowcase.classList.add("is-open");
+    projectShowcaseBack.focus();
+  });
+}
+
+/** Slide back to the welcome scene. */
+function closeProjectShowcase() {
+  projectShowcase.classList.remove("is-open");
+  document.body.classList.remove("showcase-open");
+  projectShowcase.setAttribute("aria-hidden", "true");
+
+  window.setTimeout(() => {
+    projectShowcase.inert = true;
+    if (showcaseReturnFocus) {
+      showcaseReturnFocus.focus();
+    } else {
+      projectShowcaseBack.blur();
+    }
+  }, 620);
+}
+
+document.addEventListener("click", (event) => {
+  const trigger = event.target.closest("[data-project-showcase]");
+
+  if (!trigger) {
+    return;
+  }
+
+  openProjectShowcase(event.detail === 0 ? trigger : null);
+});
+
+projectShowcaseBack.addEventListener("click", closeProjectShowcase);
+
 // Open the correct content when a main button is clicked.
 menuButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -533,7 +594,9 @@ document.addEventListener("keydown", (event) => {
       '[data-popover-target][aria-expanded="true"]'
     );
 
-    if (openTrigger) {
+    if (projectShowcase.classList.contains("is-open")) {
+      closeProjectShowcase();
+    } else if (openTrigger) {
       closeContactPopovers();
       openTrigger.focus();
     } else if (!modal.hidden) {

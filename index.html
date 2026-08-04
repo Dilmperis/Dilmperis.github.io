@@ -52,7 +52,7 @@
         <div class="main-button-item">
           <nav class="dock-stack" aria-label="Project previews">
             <button class="dock-card" type="button" data-view="projects"><span>01</span><strong>Project 1</strong></button>
-            <button class="dock-card" type="button" data-view="projects"><span>02</span><strong>Project 2</strong></button>
+            <button class="dock-card" type="button" data-project-showcase="data-attribution"><span>02</span><strong>Project 2</strong></button>
             <button class="dock-card" type="button" data-view="projects"><span>03</span><strong>Project 3</strong></button>
           </nav>
           <button class="main-button" type="button" data-view="projects">Projects</button>
@@ -77,6 +77,76 @@
       </div>
     </section>
   </main>
+
+  <section
+    class="project-showcase"
+    id="data-attribution-showcase"
+    aria-labelledby="showcase-title"
+    aria-hidden="true"
+  >
+    <div class="showcase-shell">
+      <header class="showcase-header">
+        <button class="showcase-back" id="showcase-back" type="button">
+          <span aria-hidden="true">←</span>
+          Back to portfolio
+        </button>
+        <span class="showcase-status">Prototype · Under construction</span>
+      </header>
+
+      <div class="showcase-layout">
+        <div class="showcase-intro">
+          <p class="showcase-eyebrow">Project 02 · Data Attribution</p>
+          <h2 id="showcase-title">Visual similarity, made inspectable.</h2>
+          <p>
+            A future interactive demonstration for comparing two images,
+            scoring their similarity, and revealing which visual regions
+            contributed most to the result.
+          </p>
+          <div class="showcase-tags" aria-label="Planned technologies">
+            <span>Image scoring</span>
+            <span>Similarity</span>
+            <span>Explainable AI</span>
+          </div>
+        </div>
+
+        <div class="demo-placeholder" aria-label="Under-construction demo preview">
+          <div class="demo-toolbar">
+            <span><i></i><i></i><i></i></span>
+            <strong>Live attribution workspace</strong>
+            <span class="demo-offline">Demo offline</span>
+          </div>
+
+          <div class="demo-upload-grid">
+            <div class="demo-upload">
+              <span class="demo-upload-icon" aria-hidden="true">A</span>
+              <strong>Reference image</strong>
+              <small>Drop or select an image</small>
+            </div>
+            <div class="demo-connector" aria-hidden="true"><span>↔</span></div>
+            <div class="demo-upload">
+              <span class="demo-upload-icon" aria-hidden="true">B</span>
+              <strong>Comparison image</strong>
+              <small>Drop or select an image</small>
+            </div>
+          </div>
+
+          <div class="demo-result">
+            <div>
+              <span>Similarity score</span>
+              <strong>—</strong>
+            </div>
+            <div class="demo-meter" aria-hidden="true"><span></span></div>
+            <button type="button" disabled>Run attribution</button>
+          </div>
+
+          <p class="demo-note">
+            Interactive inference will be connected after the Python model is
+            converted from the local desktop demo into a web service.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!--
     This modal is hidden initially.
