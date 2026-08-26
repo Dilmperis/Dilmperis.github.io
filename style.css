@@ -1507,6 +1507,10 @@ body.showcase-open .contact-links {
     background-color 180ms ease;
 }
 
+.showcase-back[hidden] {
+  display: none;
+}
+
 .showcase-back:hover {
   background: rgba(255, 255, 255, 0.13);
   transform: translateX(-4px);

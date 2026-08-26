@@ -8,7 +8,7 @@ const contactMenus = document.querySelectorAll(".contact-menu");
 const neuralCanvas = document.querySelector("#neural-background");
 const dockPdfLink = document.querySelector('.dock-card[href="CV.pdf"]');
 const projectShowcase = document.querySelector("#data-attribution-showcase");
-const projectShowcaseBack = document.querySelector("#showcase-back");
+const projectShowcasePath = "/data_attribution";
 
 let showcaseReturnFocus = null;
 
@@ -521,7 +521,7 @@ document.addEventListener("click", (event) => {
 });
 
 /** Slide from the welcome scene into the Project 2 prototype. */
-function openProjectShowcase(trigger) {
+function openProjectShowcase(trigger, updateHistory = true) {
   showcaseReturnFocus = trigger?.closest("#content-modal")
     ? document.querySelector('.main-button[data-view="projects"]')
     : trigger;
@@ -535,24 +535,37 @@ function openProjectShowcase(trigger) {
   projectShowcase.setAttribute("aria-hidden", "false");
   document.body.classList.add("showcase-open");
 
+  if (updateHistory && window.location.pathname !== projectShowcasePath) {
+    window.history.pushState(
+      { projectShowcase: true, openedFromPortfolio: true },
+      "",
+      projectShowcasePath
+    );
+  }
+
   requestAnimationFrame(() => {
     projectShowcase.classList.add("is-open");
-    projectShowcaseBack.focus();
   });
 }
 
 /** Slide back to the welcome scene. */
-function closeProjectShowcase() {
+function closeProjectShowcase(updateHistory = true) {
   projectShowcase.classList.remove("is-open");
   document.body.classList.remove("showcase-open");
   projectShowcase.setAttribute("aria-hidden", "true");
+
+  if (updateHistory && window.location.pathname === projectShowcasePath) {
+    if (window.history.state?.openedFromPortfolio) {
+      window.history.back();
+    } else {
+      window.history.replaceState({}, "", "/");
+    }
+  }
 
   window.setTimeout(() => {
     projectShowcase.inert = true;
     if (showcaseReturnFocus) {
       showcaseReturnFocus.focus();
-    } else {
-      projectShowcaseBack.blur();
     }
   }, 620);
 }
@@ -567,7 +580,24 @@ document.addEventListener("click", (event) => {
   openProjectShowcase(event.detail === 0 ? trigger : null);
 });
 
-projectShowcaseBack.addEventListener("click", closeProjectShowcase);
+// Keep the visible scene synchronized with browser Back/Forward navigation.
+window.addEventListener("popstate", () => {
+  if (window.location.pathname === projectShowcasePath) {
+    openProjectShowcase(null, false);
+  } else if (projectShowcase.classList.contains("is-open")) {
+    closeProjectShowcase(false);
+  }
+});
+
+// The small static route page redirects here with this query parameter so a
+// direct visit to /data_attribution works on GitHub Pages as well.
+const projectFromDirectRoute =
+  new URLSearchParams(window.location.search).get("project") === "data-attribution";
+
+if (window.location.pathname === projectShowcasePath || projectFromDirectRoute) {
+  window.history.replaceState({ projectShowcase: true }, "", projectShowcasePath);
+  openProjectShowcase(null, false);
+}
 
 // Open the correct content when a main button is clicked.
 menuButtons.forEach((button) => {
