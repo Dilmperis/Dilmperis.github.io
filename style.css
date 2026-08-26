@@ -1473,6 +1473,21 @@ body.showcase-open .contact-links {
   transition-delay: 0s;
 }
 
+/* Direct route visits show the demo on the first paint, without the homepage
+   or the slide-in transition appearing briefly underneath it. */
+html.direct-project-load .site-header,
+html.direct-project-load .hero,
+html.direct-project-load .contact-links {
+  visibility: hidden;
+}
+
+html.direct-project-load .project-showcase {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: none;
+}
+
 .showcase-shell {
   position: relative;
   width: min(1240px, calc(100% - 64px));

@@ -15,6 +15,12 @@
 
   <title>Giannis Dilmperis</title>
 
+  <script>
+    if (new URLSearchParams(window.location.search).get("project") === "data-attribution") {
+      document.documentElement.classList.add("direct-project-load");
+    }
+  </script>
+
   <link rel="icon" href="images/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png?v=2">
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png?v=2">

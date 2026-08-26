@@ -545,6 +545,7 @@ function openProjectShowcase(trigger, updateHistory = true) {
 
   requestAnimationFrame(() => {
     projectShowcase.classList.add("is-open");
+    document.documentElement.classList.remove("direct-project-load");
   });
 }
 
