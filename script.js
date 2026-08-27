@@ -358,10 +358,10 @@ function showCvOptions() {
         <span class="option-icon" aria-hidden="true">PDF</span>
         <span><strong>CV.pdf</strong><small>Open the full curriculum vitae</small></span>
       </a>
-      <article class="option-card option-card-placeholder">
+      <a class="option-card" href="animation_cv/">
         <span class="option-icon option-icon-play" aria-hidden="true">▶</span>
-        <span><strong>CV mini animation</strong><small>A mini animation as alternative form of CV</small></span>
-      </article>
+        <span><strong>Interactive CV</strong><small>Explore the milestones as a branching timeline</small></span>
+      </a>
     </div>
   `;
 }
