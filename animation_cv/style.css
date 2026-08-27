@@ -2,6 +2,10 @@
 @media(max-width:680px){.topbar{padding:22px 20px}.brand{display:none}main{width:calc(100% - 24px);padding:60px 0 80px}.intro{margin-left:10px;margin-bottom:52px}.timeline{padding:16px 14px 24px}.period{--rail-x:24px}.period-trigger{grid-template-columns:48px 1fr 36px;min-height:100px}.year{display:none}.node{grid-column:1;grid-row:1}.period-copy{grid-column:2;padding-left:4px}.toggle{grid-column:3}.branches li{grid-template-columns:49px 1fr}.branches article{margin-right:0;margin-left:7px}.branches li:before{width:25px}footer{margin:0 20px}.graph-heading small{display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
 
+/* A compact introduction keeps the CV content close to the navigation. */
+main { padding-top: 34px; }
+.intro { margin-bottom: 52px; }
+
 /* Git-style branch: one lane leaves the trunk and passes through each commit. */
 .period.last::before { bottom: calc(100% - 57px); }
 
@@ -72,6 +76,9 @@
 .branches article:hover { transform: translateY(-4px); }
 
 @media (max-width: 680px) {
+  main { padding-top: 24px; }
+  .intro { margin-bottom: 38px; }
+
   .branches {
     gap: 18px;
     padding-right: 20px;
